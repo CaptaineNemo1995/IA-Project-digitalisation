@@ -1,0 +1,64 @@
+# CyberSentinel AI — Laboratoire isolé (étape 1)
+# Lancer depuis la racine du dépôt :
+#   docker compose -f lab/docker-compose.yml --env-file .env up -d --build
+#
+# Budget RAM de ce fichier : ~640 Mo au total
+
+name: cybersentinel-lab
+
+networks:
+  labnet:
+    internal: true            # aucun accès Internet depuis le labo
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+
+services:
+
+  # Serveur Linux avec SSH : cible de la découverte, puis du scénario brute force (étape 3)
+  target-ssh:
+    build: ./targets/ssh
+    hostname: srv-ssh
+    environment:
+      SSH_USER: ${TARGET_SSH_USER:-labuser}
+      SSH_PASSWORD: ${TARGET_SSH_PASSWORD:?Définir TARGET_SSH_PASSWORD dans .env}
+    networks:
+      labnet:
+        ipv4_address: 172.30.0.10
+    mem_limit: 256m
+    cpus: 0.25
+    restart: unless-stopped
+
+  # Serveur web
+  target-web:
+    image: nginx:alpine
+    hostname: srv-web
+    networks:
+      labnet:
+        ipv4_address: 172.30.0.20
+    mem_limit: 64m
+    cpus: 0.25
+    restart: unless-stopped
+
+  # Base de données clé-valeur exposée sans mot de passe (mauvaise config volontaire à détecter)
+  target-db:
+    image: redis:7-alpine
+    hostname: srv-db
+    networks:
+      labnet:
+        ipv4_address: 172.30.0.30
+    mem_limit: 64m
+    cpus: 0.25
+    restart: unless-stopped
+
+  # Poste d'analyse : lance nmap et les scripts Python de découverte
+  scanner:
+    build: ./scanner
+    hostname: soc-scanner
+    volumes:
+      - ../discovery:/work
+    networks:
+      labnet:
+        ipv4_address: 172.30.0.100
+    mem_limit: 256m
+    cpus: 0.5
