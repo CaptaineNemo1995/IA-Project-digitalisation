@@ -1,0 +1,30 @@
+# CyberSentinel AI — Ajustements de la stack Wazuh officielle (étape 2)
+# Ce fichier est copié automatiquement dans wazuh-docker/single-node/ par scripts/setup-siem.sh
+# Docker Compose le fusionne avec le docker-compose.yml officiel de Wazuh.
+#
+# Budget RAM : ~4 Go au total (limites maximales)
+
+services:
+
+  wazuh.indexer:          # Base de données des événements (OpenSearch)
+    environment:
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"   # mémoire Java fixée à 1 Go
+    mem_limit: 2g
+    cpus: 1.0
+
+  wazuh.manager:          # Moteur d'analyse : reçoit les journaux, applique les règles, génère les alertes
+    mem_limit: 1g
+    cpus: 0.75
+    networks:
+      default:
+      labnet:                       # relié au réseau du labo pour recevoir les agents (étape 3)
+        ipv4_address: 172.30.0.50
+
+  wazuh.dashboard:        # Interface web
+    mem_limit: 1g
+    cpus: 0.5
+
+networks:
+  labnet:
+    external: true
+    name: cybersentinel-lab_labnet

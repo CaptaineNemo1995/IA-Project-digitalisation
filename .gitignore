@@ -27,3 +27,4 @@ discovery/output/
 Thumbs.db
 .vscode/
 .idea/
+lab/siem/wazuh-docker/
