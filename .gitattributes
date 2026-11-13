@@ -1,0 +1,7 @@
+# Fins de ligne cohérentes entre Windows et Linux (évite les scripts cassés dans les conteneurs)
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.pdf binary

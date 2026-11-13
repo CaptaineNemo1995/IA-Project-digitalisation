@@ -1,0 +1,29 @@
+# Secrets
+.env
+*.key
+*.pem
+*.crt
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Données générées / volumes
+data/
+volumes/
+*.log
+*.pcap
+backups/
+
+# Résultats bruts de scan (les rapports finaux vont dans docs/)
+discovery/output/
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
