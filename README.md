@@ -85,7 +85,7 @@ cybersentinel-ai/
 
 ## Feuille de route
 
-- [ ] **Étape 0** : dépôt Git, installation de Docker Sandboxes, réseau isolé
+- [x] **Étape 0** : dépôt Git, installation de Docker Sandboxes, réseau isolé
 - [ ] **Étape 1** : découverte des actifs → inventaire + cartographie
 - [ ] **Étape 2** : intégration SIEM/XDR
 - [ ] **Étape 3** : scénario de détection SSH brute force
