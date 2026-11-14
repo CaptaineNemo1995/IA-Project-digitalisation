@@ -151,13 +151,33 @@ Trois garde-fous :
 ### Ce que l'IA a produit
 Un rapport en 6 parties (résumé, chronologie, source/cible, interprétation, gravité, recommandations). Fait remarquable : **elle s'est posé seule la question clé d'une enquête — l'attaquant est-il entré ? — et a vérifié qu'aucune connexion n'avait réussi.** Elle a croisé les alertes avec l'inventaire, sans conclure d'elle-même que l'activité était autorisée.
 
+### La session dans le terminal
+L'IA planifie son enquête, puis **demande la permission avant chaque appel d'outil** :
+
+```text
+> Fais un rapport d'investigation sur les alertes SSH de la dernière heure.
+
+  ▸ resume_alertes      wazuh   heures: 24
+  ▸ activite_ip         wazuh   ip: 172.30.0.100, heures: 24
+  ▸ rechercher_alertes  wazuh   groupe: authentication_success, limite: 5
+
+  Tool approval request
+    { "tool_name": "wazuh__resume_alertes",
+      "arguments": { "heures": 24, "niveau_min": 0 } }
+
+  Goose would like to call the above tool, do you allow?
+  > Allow        (Allow the tool call once)
+    Always Allow
+    Deny
+```
+
+À chaque étape, l'analyste choisit **Allow**. Les outils étant en lecture seule, aucune action ne modifie le système. Le rapport complet rédigé ensuite est dans [`rapport-investigation-ia-2026-11-14.md`](rapport-investigation-ia-2026-11-14.md).
+
 ### La limite, et pourquoi l'humain reste indispensable
 En relisant, on a trouvé des erreurs de l'IA : des résultats attribués au mauvais appel, et des **mots parasites en langue étrangère** glissés dans le texte français (chinois, espagnol, anglais). → *L'IA assiste et accélère, mais un humain valide chaque action et relit chaque rapport.*
 
 ### À dire à l'oral
 > « L'IA ne remplace pas l'analyste : elle lui fait gagner du temps. Elle propose, elle explique, mais elle demande la permission avant d'agir, et on vérifie ce qu'elle écrit. »
-
-*(Captures : `images/goose-approbation.png` — la demande de permission ; `images/goose-rapport.png` — le rapport. Rapports complets : `rapport-investigation-ia-2026-11-14.md`.)*
 
 ---
 
