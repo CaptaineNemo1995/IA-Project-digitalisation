@@ -2,7 +2,7 @@
 
 > PoC Blue Team / SOC : découverte d'actifs, centralisation SIEM/XDR, détection et investigation assistée par IA, dans un laboratoire isolé et portable.
 
-![Statut](https://img.shields.io/badge/statut-étape%203%2F5%20validée-yellow)
+![Statut](https://img.shields.io/badge/statut-projet%20complet%205%2F5-success)
 ![Type](https://img.shields.io/badge/type-Proof%20of%20Concept-blue)
 ![RAM](https://img.shields.io/badge/RAM%20max-10%20Go-green)
 ![Wazuh](https://img.shields.io/badge/Wazuh-4.14.9-informational)
@@ -63,8 +63,8 @@ flowchart TB
 | Python + nmap | Découverte et inventaire des actifs | ✅ |
 | Wazuh 4.14.9 (SIEM/XDR) | Centralisation, détection, audit de configuration | ✅ |
 | Agent Wazuh sur srv-ssh | Collecte des journaux d'authentification | ✅ |
-| Goose + MCP | Agent IA et accès contrôlé aux alertes | ⏳ Étape 4 |
-| NVIDIA NIM API | Modèle IA pour l'analyse | ⏳ Étape 4 |
+| Goose + MCP | Agent IA et accès contrôlé aux alertes (lecture seule) | ✅ |
+| NVIDIA NIM API | Modèle IA pour l'analyse (MiniMax M3.1 Flash) | ✅ |
 
 ## Budget RAM (mesuré)
 
@@ -172,8 +172,10 @@ cybersentinel-ai/
 - [x] **Étape 1** : découverte des actifs, inventaire et cartographie → [docs/etape1-decouverte.md](docs/etape1-decouverte.md)
 - [x] **Étape 2** : intégration SIEM/XDR Wazuh + agent → [docs/etape2-siem.md](docs/etape2-siem.md)
 - [x] **Étape 3** : détection d'un brute force SSH → [docs/etape3-detection.md](docs/etape3-detection.md)
-- [ ] **Étape 4** : investigation assistée par IA (Goose + MCP + NVIDIA NIM)
-- [ ] **Étape 5** : validation de bout en bout et documentation finale
+- [x] **Étape 4** : investigation assistée par IA (Goose + MCP + NVIDIA NIM) → [docs/etape4-ia.md](docs/etape4-ia.md)
+- [x] **Étape 5** : validation de bout en bout → [docs/demo-scenario.md](docs/demo-scenario.md)
+
+> 📄 **Synthèse complète du projet** (compréhension + points à présenter au jury) : [docs/synthese-projet.md](docs/synthese-projet.md)
 
 ## Résultats clés
 
